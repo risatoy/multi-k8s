@@ -1,8 +1,7 @@
 language: generic
 sudo: required
 services:
-  - docker
-
+  - docker:
 before_install:
   # Build dev images
   - docker build -t risatoy17/react-test -f ./client/Dockerfile.dev ./client
@@ -12,12 +11,12 @@ script:
 
 after_success:
   # Build prod images
-  - docker build -t risatoy17/multi-client -f ./client
-  - docker build -t risatoy17/multi-nginx -f ./nginx
-  - docker build -t risatoy17/multi-server -f ./server
-  - docker build -t risatoy17/worker -f ./worker
+  - docker build -t risatoy17/multi-client ./client
+  - docker build -t risatoy17/multi-nginx ./nginx
+  - docker build -t risatoy17/multi-server ./server
+  - docker build -t risatoy17/multi-worker ./worker
   # Log in to the docker CLI
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin docker.io
+  - echo "$DOCKER_PASSWORD" | docker_login -u "$DOCKER_ID" --password-stdin docker.io
   # Take those images and push them to docker hub
   - docker push risatoy17/multi-client
   - docker push risatoy17/multi-nginx
