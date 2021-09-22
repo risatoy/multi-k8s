@@ -15,7 +15,7 @@ after_success:
   - docker build -t risatoy17/multi-client -f ./client
   - docker build -t risatoy17/multi-nginx -f ./nginx
   - docker build -t risatoy17/multi-server -f ./server
-  - docker build -t risaoty17/worker -f ./worker
+  - docker build -t risatoy17/worker -f ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin docker.io
   # Take those images and push them to docker hub
